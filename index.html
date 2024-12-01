@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fregelf Monarki</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
 
+    header {
+      background: #004080;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #ffffff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    nav button:hover {
+      background: #d1e0ff;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">Fregelf Monarki</h1>
+    <nav>
+      <button onclick="changeLanguage('sv')">Svenska</button>
+      <button onclick="changeLanguage('ja')">日本語</button>
+      <button onclick="changeLanguage('en')">English</button>
+      <button onclick="changeLanguage('de')">Deutsch</button>
+    </nav>
+  </header>
+  <main id="content">
+    <p id="description">Welcome to the official website of Fregelf Monarki.</p>
+  </main>
+  <footer>
+    <p id="footer">© 2024 Fregelf Monarki</p>
+  </footer>
+  <script>
+    const translations = {
+      sv: {
+        title: "Fregelf Monarki",
+        description: "Välkommen till Fregelf Monarkis officiella webbplats.",
+        footer: "© 2024 Fregelf Monarki"
+      },
+      ja: {
+        title: "フレーゲルフ君主国",
+        description: "フレーゲルフ君主国公式ウェブサイトへようこそ。",
+        footer: "© 2024 フレーゲルフ君主国"
+      },
+      en: {
+        title: "Fregelf Monarki",
+        description: "Welcome to the official website of Fregelf Monarki.",
+        footer: "© 2024 Fregelf Monarki"
+      },
+      de: {
+        title: "Fregelf Monarki",
+        description: "Willkommen auf der offiziellen Website von Fregelf Monarki.",
+        footer: "© 2024 Fregelf Monarki"
+      }
+    };
+
+    function changeLanguage(lang) {
+      const content = translations[lang];
+      document.getElementById("title").textContent = content.title;
+      document.getElementById("description").textContent = content.description;
+      document.getElementById("footer").textContent = content.footer;
+    }
+  </script>
+</body>
+</html>
