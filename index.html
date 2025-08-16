@@ -1,144 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fregelf Monarki</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f5f5;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フレーゲルフ国粋主義君主国</title>
+    <link rel="icon" href="/img/favicon.ico">
 
-    header {
-      background: #004080;
-      color: white;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    <meta property="og:title" content="フレーゲルフ国粋主義君主国">
+    <meta property="og:description" content="国家系Minecraftサーバーで活動する国粋主義君主国。">
+    <meta property="og:url" content="https://fregelf.github.io/">
+    <meta property="og:site_name" content="フレーゲルフ君主国">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fregelf.github.io/img/flag.png">
+    <meta property="og:locale" content="ja_JP">
 
-    header h1 {
-      margin: 0;
-    }
-
-    .language-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .language-selector img {
-      width: 30px;
-      height: 20px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 5px;
-      transition: border 0.3s;
-    }
-
-    .language-selector img:hover {
-      border: 2px solid #ffffff;
-    }
-
-    main {
-      padding: 40px;
-      text-align: center;
-    }
-
-    textarea {
-      width: 90%;
-      max-width: 600px;
-      height: 200px;
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    footer {
-      background: #004080;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1 id="title">Fregelf Monarki</h1>
-    <div class="language-selector">
-      <img src="https://flagcdn.com/w320/se.png" alt="Swedish" onclick="changeLanguage('sv')">
-      <img src="https://flagcdn.com/w320/jp.png" alt="Japanese" onclick="changeLanguage('ja')">
-      <img src="https://flagcdn.com/w320/gb.png" alt="English" onclick="changeLanguage('en')">
-      <img src="https://flagcdn.com/w320/de.png" alt="German" onclick="changeLanguage('de')">
-    </div>
-  </header>
-  <main>
-    <p id="description">Welcome to the official website of Fregelf Monarki.</p>
-    <textarea id="editable-content" oninput="updateContent()">
-Welcome to the official website of Fregelf Monarki.
-    </textarea>
-  </main>
-  <footer>
-    <p id="footer">© 2024 Fregelf Monarki</p>
-  </footer>
-  <script>
-    const translations = {
-      sv: {
-        title: "Fregelf Monarki",
-        description: "Välkommen till Fregelf Monarkis officiella webbplats.",
-        footer: "© 2024 Fregelf Monarki"
-      },
-      ja: {
-        title: "フレーゲルフ君主国",
-        description: "フレーゲルフ君主国公式ウェブサイトへようこそ。",
-        footer: "© 2024 フレーゲルフ君主国"
-      },
-      en: {
-        title: "Fregelf Monarki",
-        description: "Welcome to the official website of Fregelf Monarki.",
-        footer: "© 2024 Fregelf Monarki"
-      },
-      de: {
-        title: "Fregelf Monarki",
-        description: "Willkommen auf der offiziellen Website von Fregelf Monarki.",
-        footer: "© 2024 Fregelf Monarki"
-      }
-    };
 
-    let currentLang = 'en';
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="#"><img src="/img/flag.png" alt="フレーゲルフ国旗" class="header-flag"></a></h1>
+            <button class="hamburger-menu" aria-label="メニュー">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about"><i class="fas fa-flag"></i> 国家について</a></li>
+                    <li><a href="#governance"><i class="fas fa-gavel"></i> 政治</a></li>
+                    <li><a href="#economy"><i class="fas fa-industry"></i> 経済</a></li>
+                    <li><a href="#military"><i class="fas fa-fighter-jet"></i> 軍事</a></li>
+                    <li><a href="#culture"><i class="fas fa-book-open"></i> 文化</a></li>
+                    <li><a href="#minecraft"><i class="fas fa-hammer"></i> Minecraft</a></li>
+                    <li><a href="#discord"><i class="fab fa-discord"></i> Discord</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    function changeLanguage(lang) {
-      currentLang = lang;
-      const content = translations[lang];
-      document.getElementById("title").textContent = content.title;
-      document.getElementById("description").textContent = content.description;
-      document.getElementById("editable-content").value = content.description;
-      document.getElementById("footer").textContent = content.footer;
-    }
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h2>Hej!</h2>
+                <p>Welcome to Fregelf.</p>
+            </div>
+        </section>
 
-    function updateContent() {
-      const updatedText = document.getElementById("editable-content").value;
-      translations[currentLang].description = updatedText;
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>国家について</h2>
+                <div class="about-content">
+                    <img src="/img/fregelv-landscape.jpg" alt="フレーゲルフの風景" class="about-image">
+                    <div class="about-text">
+                        <p>フレーゲルフ国粋主義君主国（英：Fregelf 端：Fregälv）は、主に国家系Minecraftサーバーで活動する、独自の文化と歴史を持つ架空国家です。
+                          <br>強力な国粋主義的君主制の下、国民は国の発展と防衛に貢献しています。</p>
+                        <p>我が国家は、OFO（Orlandos försvarsorganisation）の盟主国として、構成国の繁栄・安定・安全保障に重要な役割を果たしています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // 同時に他の言語にも反映
-      Object.keys(translations).forEach(lang => {
-        if (lang !== currentLang) {
-          translations[lang].description = updatedText;
-        }
-      });
+        <section id="governance" class="content-section">
+            <div class="container">
+                <h2>政治体制</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-crown"></i></div>
+                        <h3>君主</h3>
+                        <p>現在ではSK0528JPが当国家を統治しています。君主の意志は国家の意志です。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                        <h3>政治構造</h3>
+                        <p>自由主義や民主主義とは一線を画す、国粋主義に基づく強力な中央集権体制です。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3>国民の義務</h3>
+                        <p>貴族制度は存在せず、全ての国民は国家への奉仕と貢献を義務付けられています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      document.getElementById("description").textContent = updatedText;
-    }
-  </script>
+        <section id="economy" class="content-section">
+            <div class="container">
+                <h2>経済・産業</h2>
+                <div class="economy-grid">
+                    <div class="economy-item">
+                        <img src="/img/fishery.jpg" alt="漁業" class="economy-image">
+                        <h4>漁業</h4>
+                    </div>
+                    <div class="economy-item">
+                        <img src="/img/forestry.jpg" alt="林業" class="economy-image">
+                        <h4>林業</h4>
+                    </div>
+                    <div class="economy-item">
+                        <img src="/img/agriculture.jpg" alt="農業" class="economy-image">
+                        <h4>農業</h4>
+                    </div>
+                  <!--
+                    <div class="economy-item">
+                        <img src="/img/industry.jpg" alt="重工業" class="economy-image">
+                        <h4>重工業・造船業</h4>
+                    </div>
+                  -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="military" class="content-section">
+            <div class="container">
+                <h2>軍事・国防ドクトリン</h2>
+                <p>国民の約80%が軍事・国防関連職に従事する義務徴兵制を導入しており、領土防衛に重点を置く防衛重視の戦略を採ります。</p>
+                <!--
+                <div class="military-grid">
+                    <div class="military-card">
+                        <img src="/img/jsf28.jpg" alt="JSF28" class="military-image">
+                        <h3>空軍主力機：JSF28</h3>
+                        <p>国産の制空戦闘機で、優れた高速・高機動性能を誇ります。</p>
+                    </div>
+                    <div class="military-card">
+                        <img src="/img/jsv10.jpg" alt="JSV10" class="military-image">
+                        <h3>陸軍主力戦車：JSV10</h3>
+                        <p>最新鋭の主力戦車。寒冷地での運用に特化した装備を有します。</p>
+                    </div>
+                    <div class="military-card">
+                        <img src="/img/gronin-class.jpg" alt="Grönin級フリゲート艦" class="military-image">
+                        <h3>海軍主力艦：Grönin級フリゲート</h3>
+                        <p>対潜・対空複合任務に対応する中型多目的艦艇です。</p>
+                    </div>
+                </div>
+              -->
+            </div>
+        </section>
+
+        <section id="culture" class="content-section">
+            <div class="container">
+                <h2>文化と教育</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <img src="/img/flag.png" alt="国旗" class="culture-image">
+                        <h3>国旗</h3>
+                        <p>黒地に白いスカンジナビアクロスによって構成されています。</p>
+                    </div>
+                    <div class="culture-item">
+                        <img src="/img/national-flower.png" alt="国花ヤグルマギク" class="culture-image">
+                        <h3>国花</h3>
+                        <p>ヤグルマギク。国を象徴する重要な存在として尊重されます。</p>
+                    </div>
+                    <div class="culture-item">
+                        <img src="/img/national-emblem.png" alt="国章" class="culture-image">
+                        <h3>国章</h3>
+                        <p>国家の象徴であり、威厳を示す紋章です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="minecraft" class="content-section">
+            <div class="container">
+                <h2>Minecraftでの活動</h2>
+                <p>我が国は、主にMinecraftの国家系サーバーで活動している国家です。サーバーのルールに基づき、領土を拡大し、インフラを整備し、他国家との外交や軍事的な関与を通じて、国家の繁栄を目指します。</p>
+            </div>
+        </section>
+
+        <section id="discord" class="content-section">
+            <div class="container">
+                <h2>Discordサーバー</h2>
+                <p>我が国への参加や、外交、国家運営に関するやり取りは、主にDiscordサーバーで行われています。興味のある方は、以下のリンクからぜひご参加ください。</p>
+                <div class="discord-link-box">
+                    <a href="https://discord.gg/2aC6gupwa6" class="discord-button" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discordに参加する</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-bluesky"></i></a>
+                <a href="https://discord.gg/2aC6gupwa6"><i class="fab fa-discord"></i></a>
+            </div>
+            <p>Copyright &copy; <span id="currentYear"></span> Fregelf.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
