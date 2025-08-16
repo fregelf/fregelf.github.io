@@ -147,7 +147,6 @@ nav {
     height: 80vh;
     display: flex;
     align-items: center;
-    text-align: center;
     color: var(--text-color-light);
     position: relative;
     padding-left: 8%;
