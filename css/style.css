@@ -150,6 +150,7 @@ nav {
     text-align: center;
     color: var(--text-color-light);
     position: relative;
+    padding-left: 8%;
 }
 
 .hero-content h2 {
