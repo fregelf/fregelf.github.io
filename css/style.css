@@ -1,0 +1,521 @@
+@font-face {
+    font-family: 'MiSans';
+    src: url('https://sk0528jp.github.io/font/MiSans-Normal.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #111C28; /* 暗い青 */
+    --secondary-color: #ffffff; /* 白 */
+    --accent-color: #006AA7;
+    --text-color-dark: #111C28;
+    --text-color-light: #f8f9fa;
+    --card-bg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #dddddd;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'MiSans', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'MiSans', sans-serif;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    text-decoration: none;
+}
+
+.header-flag {
+    height: 40px;
+    vertical-align: middle;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: none; /* 初期状態では非表示 */
+}
+
+.nav-links a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 400;
+    position: relative;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links a i {
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links a:hover i {
+    transform: scale(1.2);
+}
+
+.hamburger-menu {
+    display: flex; /* PCでも常時表示 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    margin-left: auto;
+    position: relative;
+    z-index: 1001;
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgba(17, 28, 40, 0.7), rgba(17, 28, 40, 0.7)), url('/img/hero-bg.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text-color-light);
+    position: relative;
+}
+
+.hero-content h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 5px var(--primary-color);
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 400;
+}
+
+/* Sections */
+.content-section {
+    padding: 5rem 0;
+}
+
+.content-section:nth-of-type(even) {
+    background-color: var(--secondary-color);
+}
+
+.content-section:nth-of-type(odd) {
+    background-color: var(--light-grey);
+}
+
+.content-section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.content-section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 1rem auto 0;
+}
+
+p {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    text-align: justify;
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.about-image {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover {
+    transform: scale(1.02);
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Card Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-color);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+/* Economy Section */
+.economy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.economy-item {
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.economy-item:hover {
+    transform: scale(1.05);
+}
+
+.economy-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.economy-item h4 {
+    font-size: 1.2rem;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+/* Military Section */
+.military-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.military-card {
+    max-width: 350px;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.military-card:hover {
+    transform: translateY(-10px);
+}
+
+.military-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.military-card h3 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    padding: 1.5rem 1rem 0.5rem;
+}
+
+.military-card p {
+    font-size: 1rem;
+    padding: 0 1.5rem 1.5rem;
+    text-align: left;
+}
+
+/* Culture Section */
+.culture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.culture-item {
+    background-color: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s;
+}
+
+.culture-item:hover {
+    transform: translateY(-5px);
+}
+
+.culture-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.culture-image {
+    width: 100px;
+    height: auto;
+    margin: 1rem auto;
+}
+
+/* Minecraft & Discord Section (unified style) */
+#minecraft,
+#discord {
+    background-color: var(--card-bg-color);
+    color: var(--text-color-dark);
+    text-align: center;
+}
+
+#minecraft p,
+#discord p {
+    text-align: center;
+    font-size: 1.1rem;
+    max-width: 700px;
+}
+
+/* Discord Section */
+.discord-link-box {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.discord-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #5865F2; /* Discordのブランドカラー */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.discord-button:hover {
+    background-color: #4752C4;
+    transform: translateY(-2px);
+}
+
+.small-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    padding: 2rem 0;
+    color: var(--text-color-light);
+    border-top: 5px solid var(--accent-color);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-color-light);
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* メニューの表示とレイアウト */
+.nav-links {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #007aff, #73e8ff);
+    z-index: 999;
+    padding: 0;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    margin: 1.5rem 0;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-links a {
+    font-size: 2rem;
+    justify-content: center;
+    color: var(--secondary-color); /* メニュー文字色を白に変更 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字に影を追加 */
+}
+
+/* その他のレスポンシブ調整 */
+@media (max-width: 768px) {
+    header .container {
+        justify-content: space-between;
+    }
+
+    .logo {
+        position: static;
+        transform: none;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-text p {
+        text-align: left;
+    }
+    
+    .card-grid, .economy-grid, .culture-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card, .economy-item, .military-card, .culture-item {
+        padding: 1.5rem;
+    }
+
+    .content-section {
+        padding: 3rem 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
