@@ -518,3 +518,11 @@ footer .container {
         font-size: 2rem;
     }
 }
+
+/* join.html hero section */
+.small-hero {
+    height: 40vh; /* 少し短めのヒーローセクション */
+    padding-left: 0; /* 中央寄せにするため */
+    justify-content: center;
+    text-align: center;
+}
