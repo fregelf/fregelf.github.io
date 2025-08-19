@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 10">
+  <!-- Dark gray field with moderate rounded corners -->
+  <rect width="15" height="10" fill="#1a1a1a" rx="1.2" ry="1.2"/>
+  <!-- White Nordic cross (sharp edges) -->
+  <rect x="4.5" y="0" width="1.8" height="10" fill="#f2f2f2"/>
+  <rect x="0" y="4.1" width="15" height="1.8" fill="#f2f2f2"/>
+</svg>
