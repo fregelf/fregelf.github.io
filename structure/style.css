@@ -83,9 +83,15 @@ main {
     margin-top: 0;
 }
 
-.card-content p {
-    font-size: 0.9rem;
-    color: #666;
+.card-details {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-details p {
+    margin: 3px 0;
 }
 
 .download-link {
