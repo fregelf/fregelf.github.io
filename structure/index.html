@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイクラ統合版 ストラクチャー配布サイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>マイクラ統合版 ストラクチャー配布サイト</h1>
+        <p>制作した戦闘機、戦車、輸送機などのmcstructureファイルを配布しています。</p>
+    </header>
+
+    <main>
+        <section class="filters">
+            <button class="filter-btn active" data-category="all">全て</button>
+            <button class="filter-btn" data-category="fighter">戦闘機</button>
+            <button class="filter-btn" data-category="vessel">艦艇</button>
+            <button class="filter-btn" data-category="vehicle">車両</button>
+            <button class="filter-btn" data-category="transport">輸送機・旅客機</button>
+            <button class="filter-btn" data-category="tank">戦車</button>
+            <button class="filter-btn" data-category="other">その他</button>
+        </section>
+
+        <section id="structures" class="structure-grid">
+            </section>
+        <p id="no-results-message" class="hidden">該当するデータが見つかりませんでした。</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
