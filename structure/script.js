@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const structures = [
         {
             name: "F-15 イーグル戦闘機",
+            creator: "Your Name",
+            dimensions: { length: 28, width: 20, height: 8 },
             description: "高い機動性を持つ単座式戦闘機です。",
             image: "images/f15.png",
             category: "fighter",
@@ -10,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "C-130 ハーキュリーズ輸送機",
+            creator: "Your Name",
+            dimensions: { length: 55, width: 60, height: 18 },
             description: "物資や人員を運ぶための大型輸送機です。",
             image: "images/c130.png",
             category: "transport",
@@ -17,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "M1 エイブラムス戦車",
+            creator: "Your Name",
+            dimensions: { length: 15, width: 8, height: 6 },
             description: "分厚い装甲と強力な主砲を持つ主力戦車です。",
             image: "images/m1_abrams.png",
             category: "tank",
@@ -24,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "ボーイング 747 旅客機",
+            creator: "Your Name",
+            dimensions: { length: 70, width: 65, height: 25 },
             description: "二階建ての大型旅客機です。",
             image: "images/b747.png",
             category: "transport",
@@ -31,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "F-22 ラプター戦闘機",
+            creator: "Your Name",
+            dimensions: { length: 25, width: 17, height: 7 },
             description: "高いステルス性を持つ最新鋭の戦闘機です。",
             image: "images/f22.png",
             category: "fighter",
@@ -39,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 新しいカテゴリのサンプルデータ
         {
             name: "駆逐艦",
+            creator: "Your Name",
+            dimensions: { length: 150, width: 20, height: 35 },
             description: "小型で高速の軍艦です。",
             image: "images/destroyer.png",
             category: "vessel",
@@ -46,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "装甲車",
+            creator: "Your Name",
+            dimensions: { length: 10, width: 5, height: 5 },
             description: "人員輸送用の装甲車両です。",
             image: "images/armored_car.png",
             category: "vehicle",
@@ -67,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="${structure.image}" alt="${structure.name}" class="card-image">
             <div class="card-content">
                 <h3>${structure.name}</h3>
+                <div class="card-details">
+                    <p>制作者: ${structure.creator}</p>
+                    <p>サイズ: 全長 ${structure.dimensions.length} Blm / 全幅 ${structure.dimensions.width} Blm / 全高 ${structure.dimensions.height} Blm</p>
+                </div>
                 <p>${structure.description}</p>
                 <a href="${structure.file}" class="download-link" download>ダウンロード</a>
             </div>
