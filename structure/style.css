@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #111C28; /* アクセントカラー1: ヘッダーの背景色 */
+    background-color: #111C28;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -45,7 +45,7 @@ main {
 }
 
 .filter-btn.active {
-    background-color: #006AA7; /* アクセントカラー2: アクティブなボタンの背景色 */
+    background-color: #006AA7;
     color: white;
 }
 
@@ -63,6 +63,8 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
     text-align: center;
+    text-decoration: none; /* リンクのスタイルをリセット */
+    color: inherit; /* リンクの色を親要素から継承 */
 }
 
 .structure-card:hover {
@@ -94,24 +96,66 @@ main {
     margin: 3px 0;
 }
 
+/* 詳細ページ用のスタイル */
+.detail-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-container h2 {
+    text-align: center;
+    color: #111C28;
+}
+
+.detail-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.detail-info p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.detail-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .download-link {
-    display: inline-block;
-    background-color: #006AA7; /* アクセントカラー2: ダウンロードボタンの背景色 */
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    background-color: #006AA7;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 25px;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 10px;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .download-link:hover {
-    background-color: #005385; /* ホバー時の色 */
+    background-color: #005385;
 }
 
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #111C28; /* アクセントカラー1: フッターの背景色 */
+    background-color: #111C28;
     color: white;
     margin-top: 2rem;
 }
