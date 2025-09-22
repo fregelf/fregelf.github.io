@@ -1,132 +1,166 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 構造物のデータ
+    // 構造物のデータ (idはファイル名に対応)
     const structures = [
         {
+            id: "f15",
             name: "F-15 イーグル戦闘機",
-            creator: "Your Name",
-            dimensions: { length: 28, width: 20, height: 8 },
             description: "高い機動性を持つ単座式戦闘機です。",
             image: "images/f15.png",
-            category: "fighter",
-            file: "files/f15_eagle.mcstructure",
-            details_page: "f15_details.html" // 詳細ページのファイル名を追加
+            category: "fighter"
         },
         {
+            id: "a10",
+            name: "A-10 サンダーボルトII",
+            description: "地上攻撃に特化した攻撃機です。",
+            image: "images/a10.png",
+            category: "attack"
+        },
+        {
+            id: "b52",
+            name: "B-52 ストラトフォートレス",
+            description: "長距離飛行が可能な戦略爆撃機です。",
+            image: "images/b52.png",
+            category: "bomber"
+        },
+        {
+            id: "sr71",
+            name: "SR-71 ブラックバード",
+            description: "超音速で飛行する戦略偵察機です。",
+            image: "images/sr71.png",
+            category: "recon"
+        },
+        {
+            id: "t4",
+            name: "T-4 練習機",
+            description: "航空自衛隊で使用されるジェット練習機です。",
+            image: "images/t4.png",
+            category: "trainer"
+        },
+        {
+            id: "c130",
             name: "C-130 ハーキュリーズ輸送機",
-            creator: "Your Name",
-            dimensions: { length: 55, width: 60, height: 18 },
             description: "物資や人員を運ぶための大型輸送機です。",
             image: "images/c130.png",
-            category: "transport",
-            file: "files/c130_hercules.mcstructure",
-            details_page: "c130_details.html"
+            category: "transport"
         },
         {
+            id: "f14",
+            name: "F-14 トムキャット",
+            description: "可変翼を持つ艦載戦闘機です。",
+            image: "images/f14.png",
+            category: "carrier-based"
+        },
+        {
+            id: "destroyer",
+            name: "イージス駆逐艦",
+            description: "防空能力に優れた大型艦艇です。",
+            image: "images/destroyer.png",
+            category: "vessel"
+        },
+        {
+            id: "patrol_boat",
+            name: "巡視艇",
+            description: "沿岸警備に使用される小型艦艇です。",
+            image: "images/patrol_boat.png",
+            category: "small-vessel"
+        },
+        {
+            id: "uh1",
+            name: "UH-1 イロコイ",
+            description: "多用途に使用される汎用ヘリコプターです。",
+            image: "images/uh1.png",
+            category: "helicopter"
+        },
+        {
+            id: "m1_abrams",
             name: "M1 エイブラムス戦車",
-            creator: "Your Name",
-            dimensions: { length: 15, width: 8, height: 6 },
             description: "分厚い装甲と強力な主砲を持つ主力戦車です。",
             image: "images/m1_abrams.png",
-            category: "tank",
-            file: "files/m1_abrams.mcstructure",
-            details_page: "m1_abrams_details.html"
+            category: "tank"
         },
         {
-            name: "ボーイング 747 旅客機",
-            creator: "Your Name",
-            dimensions: { length: 70, width: 65, height: 25 },
-            description: "二階建ての大型旅客機です。",
-            image: "images/b747.png",
-            category: "transport",
-            file: "files/boeing747.mcstructure",
-            details_page: "b747_details.html"
+            id: "jeep",
+            name: "軍用ジープ",
+            description: "人員輸送に特化した軍用車両です。",
+            image: "images/jeep.png",
+            category: "vehicle"
         },
         {
-            name: "F-22 ラプター戦闘機",
-            creator: "Your Name",
-            dimensions: { length: 25, width: 17, height: 7 },
-            description: "高いステルス性を持つ最新鋭の戦闘機です。",
-            image: "images/f22.png",
-            category: "fighter",
-            file: "files/f22_raptor.mcstructure",
-            details_page: "f22_details.html"
-        },
-        // 新しいカテゴリのサンプルデータ
-        {
-            name: "駆逐艦",
-            creator: "Your Name",
-            dimensions: { length: 150, width: 20, height: 35 },
-            description: "小型で高速の軍艦です。",
-            image: "images/destroyer.png",
-            category: "vessel",
-            file: "files/destroyer.mcstructure",
-            details_page: "destroyer_details.html"
-        },
-        {
-            name: "装甲車",
-            creator: "Your Name",
-            dimensions: { length: 10, width: 5, height: 5 },
-            description: "人員輸送用の装甲車両です。",
-            image: "images/armored_car.png",
-            category: "vehicle",
-            file: "files/armored_car.mcstructure",
-            details_page: "armored_car_details.html"
+            id: "ac130",
+            name: "AC-130 ガンシップ",
+            description: "夜間・地上支援に特化した攻撃機です。",
+            image: "images/ac130.png",
+            category: "other"
         }
     ];
 
     const structuresGrid = document.getElementById('structures');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const noResultsMessage = document.getElementById('no-results-message');
+    const searchInput = document.getElementById('searchInput');
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     // 構造物カードを作成する関数
     const createStructureCard = (structure) => {
-        const card = document.createElement('a'); // aタグに変更
+        const card = document.createElement('div');
         card.className = 'structure-card';
         card.dataset.category = structure.category;
-        card.href = structure.details_page; // 詳細ページへのリンクを設定
 
         const html = `
             <img src="${structure.image}" alt="${structure.name}" class="card-image">
             <div class="card-content">
                 <h3>${structure.name}</h3>
-                <div class="card-details">
-                    <p>制作者: ${structure.creator}</p>
-                    <p>サイズ: 全長 ${structure.dimensions.length} Blm / 全幅 ${structure.dimensions.width} Blm / 全高 ${structure.dimensions.height} Blm</p>
-                </div>
                 <p>${structure.description}</p>
+                <a href="pages/${structure.id}.html" class="detail-link">詳細を見る</a>
             </div>
         `;
         card.innerHTML = html;
         structuresGrid.appendChild(card);
     };
 
-    // 全ての構造物を表示
-    const displayStructures = (category) => {
+    // フィルターと検索に基づいて構造物を表示
+    const displayStructures = () => {
+        const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+        const searchTerm = searchInput.value.toLowerCase();
         structuresGrid.innerHTML = ''; // グリッドをクリア
-        const filteredStructures = structures.filter(structure => 
-            category === 'all' || structure.category === category
-        );
 
-        if (filteredStructures.length > 0) {
-            noResultsMessage.classList.add('hidden');
-            filteredStructures.forEach(createStructureCard);
-        } else {
-            noResultsMessage.classList.remove('hidden');
-        }
+        structures.forEach(structure => {
+            const matchesCategory = (activeCategory === 'all' || structure.category === activeCategory);
+            const matchesSearch = (
+                structure.name.toLowerCase().includes(searchTerm) ||
+                structure.description.toLowerCase().includes(searchTerm)
+            );
+
+            if (matchesCategory && matchesSearch) {
+                createStructureCard(structure);
+            }
+        });
     };
 
     // 初期表示
-    displayStructures('all');
+    displayStructures();
 
-    // フィルターボタンのイベントリスナーを設定
+    // フィルターボタンのイベントリスナー
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const category = button.dataset.category;
-            displayStructures(category);
-
-            // アクティブクラスの切り替え
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn.active').classList.remove('active');
             button.classList.add('active');
+            displayStructures();
+        });
+    });
+
+    // 検索入力のイベントリスナー
+    searchInput.addEventListener('input', displayStructures);
+
+    // アコーディオンヘッダーのイベントリスナー
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionItem = header.parentElement;
+            if (!accordionItem.classList.contains('active')) {
+                document.querySelectorAll('.accordion-item.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+            accordionItem.classList.toggle('active');
         });
     });
 });
