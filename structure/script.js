@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 構造物のデータ (idはファイル名に対応)
     const structures = [
         {
-            id: "f15",
-            name: "F-15 イーグル戦闘機",
-            description: "高い機動性を持つ単座式戦闘機です。",
-            image: "images/f15.png",
+            id: "jsf28a",
+            name: "JSF28A",
+            description: "単座式汎用型戦闘機",
+            image: "images/jsf28a.png",
             category: "fighter"
         },
         {
