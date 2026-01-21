@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMPR SYSTEM v7.0 [GOLD]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div class="app-interface">
+        
+        <aside class="sidebar-editor">
+            <div class="brand-header">
+                <div class="brand-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="brand-text">
+                    <h1>FLIEGELF MOD</h1>
+                    <span>PERSONALADMINISTRATION v7.0</span>
+                </div>
+            </div>
+
+            <div class="scroll-area">
+                <div class="form-group">
+                    <div class="section-title"><i class="fas fa-id-card"></i> BASINFORMATION</div>
+                    <div class="input-wrapper">
+                        <label>FULLSTÄNDIGT NAMN / 氏名</label>
+                        <input type="text" id="in-name" placeholder="例: Ryosuke Akagi">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>ID-NUMMER / 軍歴番号</label>
+                        <input type="text" id="in-id" placeholder="例: FM-2026-X99">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="section-title"><i class="fas fa-user-tag"></i> TILLHÖRIGHET</div>
+                    <div class="input-wrapper">
+                        <label>FÖRSVARSGREN / 所属軍種</label>
+                        <select id="in-branch">
+                            <option value="Armén / 陸軍">Armén / 陸軍</option>
+                            <option value="Flottan / 海軍">Flottan / 海軍</option>
+                            <option value="Flygvapnet / 空軍">Flygvapnet / 空軍</option>
+                            <option value="Högkvarteret / 国防本部">Högkvarteret / 国防本部</option>
+                            <option value="Särskilda operationsgruppen / 特殊作戦群">SOG / 特殊作戦群</option>
+                        </select>
+                    </div>
+                    <div class="row-2">
+                        <div class="input-wrapper">
+                            <label>GRAD / 階級</label>
+                            <input type="text" id="in-rank" placeholder="例: Överste">
+                        </div>
+                        <div class="input-wrapper">
+                            <label>BEFATTNING / 役職</label>
+                            <input type="text" id="in-position" placeholder="例: Stabschef">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="section-title"><i class="fas fa-camera"></i> FOTO UPLOAD</div>
+                    <div class="file-drop-area" id="drop-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Drag & Drop eller Klicka</span>
+                        <input type="file" id="in-image" accept="image/*" hidden>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="section-title"><i class="fas fa-file-alt"></i> DETALJER</div>
+                    <div class="input-wrapper">
+                        <label>BAKGRUND & MERITER / 経歴詳細</label>
+                        <textarea id="in-bio" placeholder="経歴や特記事項を入力..."></textarea>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>SIGNERANDE OFFICER / 認証官</label>
+                        <input type="text" id="in-signer" placeholder="認証担当官の署名">
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-footer">
+                <button id="download-btn" class="btn-main">
+                    <i class="fas fa-file-pdf"></i> PDF EXPORTERA
+                </button>
+                <div class="sub-actions">
+                    <button id="save-json" class="btn-sub" title="Spara Data"><i class="fas fa-save"></i></button>
+                    <button id="load-json-trigger" class="btn-sub" title="Ladda Data"><i class="fas fa-folder-open"></i></button>
+                    <input type="file" id="load-json-input" hidden accept=".json">
+                </div>
+            </div>
+        </aside>
+
+        <main class="preview-stage">
+            <div class="stage-controls">
+                <span><i class="fas fa-eye"></i> PREVIEW MODE: A4</span>
+            </div>
+            
+            <div id="pdf-wrapper">
+                <div id="pdf-content" class="document-sheet">
+                    <div class="watermark-layer">TOP SECRET</div>
+                    
+                    <div class="doc-layout">
+                        <div class="side-col">
+                            <div class="photo-frame">
+                                <div id="out-photo" class="photo-inner">
+                                    <i class="fas fa-user-secret placeholder-icon"></i>
+                                </div>
+                                <div class="photo-overlay"></div>
+                            </div>
+
+                            <div class="meta-list">
+                                <div class="meta-group">
+                                    <label>NAMN</label>
+                                    <div id="out-name" class="val-lg">---</div>
+                                </div>
+                                <div class="meta-group">
+                                    <label>ID-NUMMER</label>
+                                    <div id="out-id" class="val-mono">---</div>
+                                </div>
+                                <div class="meta-group">
+                                    <label>FÖRSVARSGREN</label>
+                                    <div id="out-branch" class="val-std">---</div>
+                                </div>
+                                <div class="meta-group">
+                                    <label>GRAD & BEFATTNING</label>
+                                    <div id="out-rank-pos" class="val-std">---</div>
+                                </div>
+                            </div>
+
+                            <div class="side-footer">
+                                <div class="barcode-box">
+                                    <div class="barcode-lines"></div>
+                                    <span>FMPR-SECURE-ID</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-col">
+                            <header class="doc-header">
+                                <div class="header-text">
+                                    <span class="classification">TOPPHEMLIG HANDLING / 最高機密文書</span>
+                                    <h1>PERSONAKT</h1>
+                                    <span class="subtitle">Försvarsmakten / 職員個人記録書</span>
+                                </div>
+                                <div class="mod-crest-box">
+                                    <img src="./img/logo.png" id="mod-logo-img" alt="MOD" crossorigin="anonymous">
+                                </div>
+                            </header>
+
+                            <section class="doc-body">
+                                <h3><i class="fas fa-history"></i> BAKGRUND & MERITER</h3>
+                                <div class="divider"></div>
+                                <div id="out-bio" class="bio-text">---</div>
+                            </section>
+
+                            <footer class="doc-footer">
+                                <div class="signature-block">
+                                    <div id="out-signature" class="sig-handwriting"></div>
+                                    <div class="sig-label">Signatur av officer / 認証官署名</div>
+                                </div>
+                                <div class="stamp-block">
+                                    <div id="out-date" class="date-text"></div>
+                                    <div class="dept-text">FÖRSVARSDEPARTEMENTET<br>Personalenheten</div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
