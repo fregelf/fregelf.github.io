@@ -1,0 +1,139 @@
+:root {
+    --bg-dark: #0f1115;
+    --bg-panel: #161b22;
+    --border: #30363d;
+    --accent: #5e81ac;
+    --accent-hover: #81a1c1;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --paper-white: #fdfdfd;
+    --ink-navy: #1e293b;
+    --alert: #e11d48;
+}
+
+* { box-sizing: border-box; outline: none; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: 'Inter', 'Noto Sans JP', sans-serif; background: var(--bg-dark); color: var(--text-main); overflow: hidden; }
+
+/* --- レイアウト構造 --- */
+.app-interface { display: flex; height: 100vh; }
+
+/* 左サイドバー (UI) */
+.sidebar-editor { width: 400px; background: var(--bg-panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 10; box-shadow: 5px 0 15px rgba(0,0,0,0.3); }
+
+.brand-header { padding: 25px; background: #0d1117; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); }
+.brand-icon { font-size: 24px; color: var(--accent); }
+.brand-text h1 { margin: 0; font-size: 18px; letter-spacing: 1px; }
+.brand-text span { font-size: 10px; color: var(--text-muted); letter-spacing: 2px; }
+
+.scroll-area { flex: 1; overflow-y: auto; padding: 20px; }
+.scroll-area::-webkit-scrollbar { width: 6px; }
+.scroll-area::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+.form-group { margin-bottom: 30px; }
+.section-title { font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 10px; border-bottom: 1px solid #30363d; padding-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+
+.input-wrapper { margin-bottom: 15px; }
+.input-wrapper label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; }
+.row-2 { display: flex; gap: 10px; }
+.row-2 .input-wrapper { flex: 1; }
+
+input, select, textarea { width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 13px; transition: 0.2s; font-family: inherit; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(94, 129, 172, 0.2); }
+textarea { height: 100px; resize: none; line-height: 1.5; }
+
+/* ファイルドロップエリア */
+.file-drop-area { border: 2px dashed var(--border); padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; color: var(--text-muted); }
+.file-drop-area:hover { border-color: var(--accent); color: var(--accent); background: rgba(94, 129, 172, 0.05); }
+.file-drop-area i { font-size: 24px; display: block; margin-bottom: 8px; }
+.file-drop-area span { font-size: 12px; }
+
+.action-footer { padding: 20px; background: #0d1117; border-top: 1px solid var(--border); }
+.btn-main { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
+.btn-main:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-main:disabled { background: #444; cursor: not-allowed; opacity: 0.7; }
+
+.sub-actions { display: flex; gap: 10px; margin-top: 10px; }
+.btn-sub { flex: 1; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-muted); padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+.btn-sub:hover { color: #fff; border-color: #666; }
+
+/* 右側：プレビューステージ */
+.preview-stage { flex: 1; background: #222; display: flex; flex-direction: column; align-items: center; padding: 40px; overflow: auto; position: relative; }
+.stage-controls { margin-bottom: 20px; color: #666; font-size: 12px; font-family: 'JetBrains Mono', monospace; }
+
+/* --- PDF用紙設定 (A4 mm固定) --- */
+#pdf-wrapper { box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+
+.document-sheet {
+    width: 210mm;
+    height: 296.8mm; /* 余白事故防止のため微調整 */
+    background: var(--paper-white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    color: var(--ink-navy);
+}
+
+.doc-layout { display: flex; width: 100%; height: 100%; }
+
+/* 左カラム (パーソナル) */
+.side-col { width: 68mm; background: var(--ink-navy); color: #fff; padding: 15mm 5mm; display: flex; flex-direction: column; align-items: center; }
+
+.photo-frame { width: 45mm; height: 55mm; background: #fff; margin-bottom: 10mm; position: relative; border: 1mm solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; }
+.photo-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e2e8f0; }
+.photo-inner img { width: 100%; height: 100%; object-fit: cover; }
+.placeholder-icon { font-size: 30px; color: #cbd5e1; }
+
+.meta-list { width: 100%; padding: 0 4mm; }
+.meta-group { margin-bottom: 6mm; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2mm; }
+.meta-group label { font-size: 7pt; color: var(--accent); font-weight: bold; display: block; margin-bottom: 1mm; }
+.val-lg { font-size: 11pt; font-weight: 700; }
+.val-std { font-size: 9pt; }
+.val-mono { font-family: 'JetBrains Mono', monospace; font-size: 10pt; letter-spacing: -0.5px; }
+
+.side-footer { margin-top: auto; width: 100%; text-align: center; }
+.barcode-box { opacity: 0.6; }
+.barcode-lines { height: 8mm; background: repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 3px); margin-bottom: 2mm; width: 80%; margin-left: auto; margin-right: auto; }
+.barcode-box span { font-size: 6pt; font-family: monospace; }
+
+/* 右カラム (メイン) */
+.main-col { flex: 1; padding: 15mm 12mm; display: flex; flex-direction: column; }
+
+.doc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8mm; border-bottom: 2px solid var(--ink-navy); padding-bottom: 4mm; }
+.header-text h1 { font-size: 26pt; margin: 2mm 0; line-height: 1; letter-spacing: 1px; }
+.classification { font-size: 8pt; font-weight: bold; color: var(--alert); letter-spacing: 1.5px; }
+.subtitle { font-size: 10pt; color: #64748b; font-weight: 400; }
+
+.mod-crest-box { width: 28mm; height: 32mm; }
+.mod-crest-box img { width: 100%; height: 100%; object-fit: contain; }
+
+.doc-body { flex: 1; }
+.doc-body h3 { font-size: 12pt; margin: 0 0 2mm 0; color: var(--ink-navy); display: flex; align-items: center; gap: 2mm; }
+.divider { height: 1px; background: #cbd5e1; margin-bottom: 5mm; }
+.bio-text { font-size: 10.5pt; line-height: 1.6; text-align: justify; white-space: pre-wrap; font-family: 'Noto Sans JP', sans-serif; }
+
+.doc-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; }
+.signature-block { width: 50%; }
+.sig-handwriting { font-family: 'Dancing Script', cursive; font-size: 24pt; color: #000080; min-height: 12mm; border-bottom: 1px solid #000; margin-bottom: 2mm; }
+.sig-label { font-size: 8pt; color: #64748b; }
+
+.stamp-block { text-align: right; }
+.date-text { font-size: 9pt; font-weight: bold; margin-bottom: 1mm; }
+.dept-text { font-size: 8pt; color: #94a3b8; line-height: 1.3; }
+
+.watermark-layer { position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; font-weight: 900; color: rgba(0,0,0,0.03); pointer-events: none; white-space: nowrap; z-index: 0; }
+
+/* スマホ対応 */
+@media (max-width: 1100px) {
+    .app-interface { flex-direction: column; overflow-y: auto; height: auto; }
+    .sidebar-editor { width: 100%; height: auto; border-right: none; box-shadow: none; }
+    .scroll-area { max-height: 400px; }
+    .preview-stage { padding: 10px; overflow-x: auto; display: block; }
+    #pdf-wrapper { transform: scale(0.6); transform-origin: top left; margin-bottom: -40%; }
+}
+
+/* トースト通知 */
+#toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: #333; color: #fff; padding: 12px 20px; border-radius: 4px; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: slideIn 0.3s ease; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 10px; }
+.toast.success { border-color: #10b981; }
+.toast.error { border-color: #ef4444; }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
