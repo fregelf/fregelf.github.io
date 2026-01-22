@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>11:9 画像切り抜きツール</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 画像アップロードボタンの装飾 */
+        .file-upload {
+            margin-bottom: 20px;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #555;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 編集エリアのコンテナ */
+        .img-container {
+            width: 100%;
+            max-width: 500px; /* スマホで見やすい最大幅 */
+            height: 60vh;     /* 画面の高さの60%を使用 */
+            background-color: #333;
+            margin-bottom: 20px;
+            display: none; /* 画像が選ばれるまで非表示 */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* アクションボタン */
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+            display: none; /* 画像選択前は非表示 */
+        }
+
+        .btn:active {
+            background-color: #0056b3;
+            transform: translateY(2px);
+        }
+
+        /* 結果表示エリア */
+        #result-area {
+            margin-top: 30px;
+            display: none;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        #result-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>11:9 (縦長) 画像切り抜き</h1>
+
+    <div class="file-upload">
+        <label for="file-input" class="custom-file-upload">
+            📷 画像を選択・撮影
+        </label>
+        <input id="file-input" type="file" accept="image/*">
+    </div>
+
+    <div class="img-container">
+        <img id="image" src="">
+    </div>
+
+    <button id="crop-btn" class="btn">切り抜く</button>
+
+    <div id="result-area">
+        <h3>完成画像</h3>
+        <img id="result-img" src="">
+        <br>
+        <a id="download-link" class="download-link" href="#" download="cropped-image.png">画像を保存する</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const image = document.getElementById('image');
+        const imgContainer = document.querySelector('.img-container');
+        const cropBtn = document.getElementById('crop-btn');
+        const resultArea = document.getElementById('result-area');
+        const resultImg = document.getElementById('result-img');
+        const downloadLink = document.getElementById('download-link');
+
+        let cropper;
+
+        // ファイルが選択された時の処理
+        fileInput.addEventListener('change', function (e) {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // 前回のクロッパーがあれば破棄
+                    if (cropper) {
+                        cropper.destroy();
+                        cropper = null;
+                    }
+
+                    // 画像をセット
+                    image.src = e.target.result;
+                    
+                    // UIを表示
+                    imgContainer.style.display = 'block';
+                    cropBtn.style.display = 'inline-block';
+                    resultArea.style.display = 'none';
+
+                    // Cropperを初期化
+                    cropper = new Cropper(image, {
+                        aspectRatio: 9 / 11, // 幅9 : 高さ11 (11:9の縦長版)
+                        viewMode: 1,         // 切り抜き枠をキャンバス内に制限
+                        dragMode: 'move',    // 画像をドラッグして位置調整
+                        autoCropArea: 0.9,   // 初期表示時の選択範囲の大きさ
+                        restore: false,
+                        guides: true,
+                        center: true,
+                        highlight: false,
+                        cropBoxMovable: false, // スマホでは枠固定・画像移動の方が操作しやすい
+                        cropBoxResizable: true,
+                        toggleDragModeOnDblclick: false,
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 「切り抜く」ボタンが押された時の処理
+        cropBtn.addEventListener('click', function () {
+            if (!cropper) return;
+
+            // 切り抜いた画像データを取得 (Canvas)
+            const canvas = cropper.getCroppedCanvas({
+                width: 900,  // 出力サイズの目安（必要に応じて変更可）
+                // heightはアスペクト比に従って自動計算されます
+            });
+
+            // Canvasを画像URLに変換
+            const croppedImageURL = canvas.toDataURL('image/png');
+
+            // 結果を表示
+            resultImg.src = croppedImageURL;
+            downloadLink.href = croppedImageURL;
+            
+            // 画面スクロール
+            resultArea.style.display = 'block';
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
